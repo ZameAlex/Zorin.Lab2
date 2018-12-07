@@ -30,7 +30,8 @@ namespace _2
 
 		private double CalcFi(double x)
 		{
-			return -Pow((3.7 - 3 * Log(x + 3)) / 0.6, 0.25);
+			//return Pow((3.7 - 3 * Log(x + 3)) / 0.6, 0.25);
+			return Pow(E, (3.7 - 0.6 * Pow(x, 4)) / 3) - 3;
 		}
 
 		protected override double AccuracyMeasuring(double x)

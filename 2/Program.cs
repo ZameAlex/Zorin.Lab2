@@ -10,12 +10,12 @@ namespace _2
 	{
 		static void Main(string[] args)
 		{
-			IterationMethod im = new IterationMethod(-2, 0.94375);
-			Console.WriteLine(im.CalcFirstDerivate(-2));
-			Console.WriteLine(im.CalcFirstDerivate(-1));
+			IterationMethod im = new IterationMethod(-2, 0.68253968253968253968253968253968);
+			Console.WriteLine(im.CalcFirstDerivate(0));
+			Console.WriteLine(im.CalcFirstDerivate(0.45));
 			for (int i = 0; i < 5; i++)
 			{
-				Console.WriteLine(im.CalcX((double)-2, (double)-1));
+				Console.WriteLine(im.CalcX(0, 1));
 				im.AccuracyPower -= 3;
 			}
 			Console.ReadKey();
