@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseMethod.cs" />
+    <Compile Include="ConsoleTables.cs" />
     <Compile Include="IterationMethod.cs" />
     <Compile Include="NewtonMethod.cs" />
     <Compile Include="Program.cs" />

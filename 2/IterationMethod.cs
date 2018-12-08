@@ -10,34 +10,32 @@ namespace _2
 	internal class IterationMethod : BaseMethod
 	{
 		public double Q { get; protected set; }
-		public IterationMethod(int accuracyPower, double q) : base(accuracyPower)
+		public IterationMethod(double q) : base()
 		{
 			Q = q;
 		}
 
-		public double CalcX(double a,double b)
+		public override double CalcX(double a,double b)
 		{
+            N = 0;
 			double x0, x = (a+b)/2;
 			do
 			{
 				x0 = x;
-				x = CalcFi(x);
+				x = CalcFi(x,a>=0 && b>=0);
 				N++;
 			}
 			while (!IsProcessFinished(x, x0));
 			return x;
 		}
 
-		private double CalcFi(double x)
+		private double CalcFi(double x, bool moreNull)
 		{
-			//return Pow((3.7 - 3 * Log(x + 3)) / 0.6, 0.25);
+			if(!moreNull)
+                return -Pow((3.7 - 3 * Log(x + 3)) / 0.6, 0.25);
 			return Pow(E, (3.7 - 0.6 * Pow(x, 4)) / 3) - 3;
 		}
 
-		protected override double AccuracyMeasuring(double x)
-		{
-			throw new NotImplementedException();
-		}
 
 		protected override bool IsProcessFinished(double xk, double xk1)
 		{

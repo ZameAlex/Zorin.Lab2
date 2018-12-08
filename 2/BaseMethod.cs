@@ -9,9 +9,9 @@ namespace _2
 
 		public int N { get; protected set; }
 
-		public BaseMethod(int accuracyPower)
+		public BaseMethod()
 		{
-			AccuracyPower = accuracyPower;
+			AccuracyPower = -2;
 			N = 0;
 		}
 
@@ -30,9 +30,10 @@ namespace _2
 			return 7.2 * Pow(x, 2) - 3 / Pow(x + 3, 2);
 		}
 
+        public abstract double CalcX(double a, double b);
+
 		protected abstract bool IsProcessFinished(double xk, double xk1);
 
-		protected abstract double AccuracyMeasuring(double x1);
 
 
 	}

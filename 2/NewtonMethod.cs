@@ -1,26 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using static System.Math;
 
 namespace _2
 {
 	class NewtonMethod : BaseMethod
 	{
 		public double M1 { get; protected set; }
-		public NewtonMethod(int accuracyPower, int m1) : base(accuracyPower)
+
+		public NewtonMethod(double m1) : base()
 		{
+            M1 = m1;
 		}
 
-		protected override double AccuracyMeasuring(double x)
-		{
-			throw new NotImplementedException();
-		}
-
+		
 		protected override bool IsProcessFinished(double xk, double xk1)
 		{
-			throw new NotImplementedException();
+            if (xk-xk1<Pow(10,AccuracyPower))
+                return true;
+            return false;
 		}
-	}
+
+        public override double CalcX(double a, double b)
+        {
+            N = 0;
+            var fa = CalcFunction(a);
+            var fb = CalcFunction(b);
+            double x0, x;
+            if (fa * CalcSecondDerivate(a) > 0)
+                x0 = a;
+            else
+                x0 = b;
+            x = x0;
+            do
+            {
+                x0 = x;
+                x = x - CalcFunction(x) / CalcFirstDerivate(x);
+                N++;
+            }
+            while (!IsProcessFinished(x, x0));
+            return x;
+        }
+    }
 }
