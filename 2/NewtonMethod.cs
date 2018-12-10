@@ -15,7 +15,7 @@ namespace _2
 		
 		protected override bool IsProcessFinished(double xk, double xk1)
 		{
-            if (xk-xk1<Pow(10,AccuracyPower))
+            if (Abs(CalcFunction(xk))/M1<=Pow(10,AccuracyPower))
                 return true;
             return false;
 		}
