@@ -26,7 +26,7 @@ namespace _2
 			{
                 var x = im1.CalcX(-2, -1);
                 iterationCount.Add(im1.N);
-				table1.AddRow($"10^{im1.AccuracyPower}", x, im1.CalcFunction(x) - 0);
+				table1.AddRow($"10^{im1.AccuracyPower}", x, im1.Accuracy);
 				im1.AccuracyPower -= 3;
 			}
 			table1.Write();
@@ -37,7 +37,7 @@ namespace _2
             {
 				var x = nm1.CalcX(-2, -1);
 				newtonCount.Add(nm1.N);
-				table2.AddRow($"10^{nm1.AccuracyPower}", x, im1.CalcFunction(x) - 0);
+				table2.AddRow($"10^{nm1.AccuracyPower}", x, nm1.Accuracy);
 				nm1.AccuracyPower -= 3;
 			}
 			table2.Write();

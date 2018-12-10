@@ -39,6 +39,7 @@ namespace _2
 
 		protected override bool IsProcessFinished(double xk, double xk1)
 		{
+			Accuracy = Abs(xk - xk1) * Q / (Q - 1);
 			if (Abs(xk - xk1) > (1 - Q) / Q * Pow(10, AccuracyPower))
 				return false;
 			return true;
