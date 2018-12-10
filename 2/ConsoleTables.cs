@@ -232,7 +232,7 @@ namespace ConsoleTables
     public class ConsoleTableOptions
     {
         public IEnumerable<string> Columns { get; set; } = new List<string>();
-        public bool EnableCount { get; set; } = true;
+        public bool EnableCount { get; set; } = false;
     }
 
     public enum Format

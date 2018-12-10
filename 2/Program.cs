@@ -11,61 +11,44 @@ namespace _2
 	{
 		static void Main(string[] args)
 		{
+			Console.OutputEncoding = Encoding.UTF8;
             var minFx1 = 0.9;
-            var minFx2 = 0.956696;
+            //var minFx2 = 0.956696;
             var q1 = 0.9855;
-            var q2 = 0.682539;
+            //var q2 = 0.682539;
             IterationMethod im1 = new IterationMethod(q1);
-            IterationMethod im2 = new IterationMethod(q2);
             NewtonMethod nm1 = new NewtonMethod(minFx1);
-            NewtonMethod nm2 = new NewtonMethod(minFx2);
-            List<double> FirstX = new List<double>();
-            List<int> IterationCount = new List<int>();
-            List<double> Mistake = new List<double>();
+            List<int> iterationCount = new List<int>();
+			List<int> newtonCount = new List<int>();
+			Console.WriteLine("Метод ітерацій");
+			var table1 = new ConsoleTable("ei", "Значення кореня", "Оцінка точності кореня");
 			for (int i = 0; i < 5; i++)
 			{
                 var x = im1.CalcX(-2, -1);
-                Console.WriteLine(x);
-                FirstX.Add(x);
-                IterationCount.Add(im1.N);
-                Mistake.Add(im1.CalcFunction(x) - 0);
+                iterationCount.Add(im1.N);
+				table1.AddRow($"10^{im1.AccuracyPower}", x, im1.CalcFunction(x) - 0);
 				im1.AccuracyPower -= 3;
 			}
+			table1.Write();
             Console.WriteLine();
-            for (int i = 0; i < 5; i++)
+			Console.WriteLine("Метод Ньютона (дотичних)");
+			var table2 = new ConsoleTable("ei", "Значення кореня", "Оцінка точності кореня");
+			for (int i = 0; i < 5; i++)
             {
-                var x = im2.CalcX(0, 0.5);
-                Console.WriteLine(x);
-                FirstX.Add(x);
-                IterationCount.Add(im2.N);
-                Mistake.Add(im2.CalcFunction(x) - 0);
-                im2.AccuracyPower -= 3;
-            }
-            Console.WriteLine(  );
-            for (int i = 0; i < 5; i++)
-            {
-                var x = nm1.CalcX(-2, -1);
-                Console.WriteLine(x);
-                FirstX.Add(x);
-                IterationCount.Add(nm1.N);
-                Mistake.Add(nm1.CalcFunction(x) - 0);
-                nm1.AccuracyPower -= 3;
-            }
+				var x = nm1.CalcX(-2, -1);
+				newtonCount.Add(nm1.N);
+				table2.AddRow($"10^{nm1.AccuracyPower}", x, im1.CalcFunction(x) - 0);
+				nm1.AccuracyPower -= 3;
+			}
+			table2.Write();
             Console.WriteLine();
-            for (int i = 0; i < 5; i++)
+			Console.WriteLine("Порівняння швидкості збіжності ітераційного та інших методів");
+			var table3 = new ConsoleTable("ei", "Кількість ітерацій за методом І", "Кількість ітерацій за методом Д ");
+			for (int i = 0, j=-2; i < 5; i++,j-=3)
             {
-                var x = nm2.CalcX(0, 0.5);
-                Console.WriteLine(x);
-                FirstX.Add(x);
-                IterationCount.Add(nm2.N);
-                Mistake.Add(nm2.CalcFunction(x) - 0);
-                nm2.AccuracyPower -= 3;
+				table3.AddRow($"10^{j}", iterationCount[i], newtonCount[i]);
             }
-            var table = new ConsoleTable("one", "two", "three");
-            table.AddRow(1, 2, 3)
-                 .AddRow("this line should be longer", "yes it is", "oh");
-            table.Options.EnableCount = false;
-            table.Write();
+			table3.Write();
             Console.ReadKey();
 		}
 	}
